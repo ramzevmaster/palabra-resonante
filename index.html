@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Sesión: El Museo de las Palabras Vivas</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* Estilos del Encabezado */
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 3rem 1rem;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .badge-custom {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            margin: 0.2rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* Estilos de las Tarjetas de los Pasos */
+        .step-card {
+            border: none;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .step-card .card-header {
+            background-color: white;
+            border-bottom: 1px solid #eee;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .time-badge {
+            background-color: #e9ecef;
+            color: #495057;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+        }
+
+        /* Sección de Nota y Materiales */
+        .note-box {
+            background-color: #e8f4fd;
+            border-left: 5px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        /* Diagrama de Flujo (Timeline) */
+        .flow-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            margin-top: 3rem;
+            padding-bottom: 2rem;
+        }
+
+        .flow-container::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background-color: #dee2e6;
+            z-index: 1;
+        }
+
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 0 10px;
+        }
+
+        .flow-circle {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0 auto 15px auto;
+            border: 4px solid var(--bg-color);
+            box-shadow: 0 0 0 3px var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover .flow-circle {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .flow-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .flow-time {
+            font-size: 0.8rem;
+            color: #6c757d;
+            background: #e9ecef;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        /* Responsividad para el flujo */
+        @media (max-width: 768px) {
+            .flow-container {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-left: 20px;
+            }
+            .flow-container::before {
+                top: 0;
+                bottom: 0;
+                left: 24px;
+                width: 4px;
+                height: 100%;
+            }
+            .flow-step {
+                display: flex;
+                text-align: left;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+            .flow-circle {
+                margin: 0 15px 0 0;
+                flex-shrink: 0;
+            }
+            .flow-text {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header class="header-section text-center">
+        <div class="container">
+            <h1 class="display-5 fw-bold mb-3">El Museo de las Palabras Vivas</h1>
+            <h2 class="h4 fw-light mb-4">Plan de Sesión - Unidad III: La "Lectura del Mundo"</h2>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <span class="badge badge-custom rounded-pill"><i class="fas fa-user-graduate me-2"></i>Facilitadora: Roxana Madrid - Doctorante en Ciencias de la Educación</span>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <span class="badge badge-custom rounded-pill"><i class="fas fa-users me-2"></i>Participantes: Pregrado (Educación Integral)</span>
+                <span class="badge badge-custom rounded-pill"><i class="fas fa-clock me-2"></i>Duración: 60 Minutos</span>
+            </div>
+            <div class="mt-4">
+                <button onclick="window.print()" class="btn btn-light text-primary fw-bold rounded-pill px-4">
+                    <i class="fas fa-print me-2"></i> Imprimir Plan
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="container mb-5">
+        
+        <div class="row g-4">
+            <!-- Paso 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card step-card">
+                    <div class="card-header">
+                        <span><i class="fas fa-play-circle text-accent me-2"></i>1. Apertura y Encuadre</span>
+                        <span class="time-badge">10 min</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2"><strong>Bienvenida:</strong> La facilitadora (doctorante) saluda y presenta el propósito de la clase. Explica brevemente el concepto de vocabulario resonante.</li>
+                            <li class="mb-2"><strong>Dinámica:</strong> Se explica que el aula será un museo. Los estudiantes usarán su "palabra resonante", representación visual y micro texto (tarea previa).</li>
+                            <li><strong>Reglas:</strong> Organización del recorrido y metodología de coevaluación.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card step-card">
+                    <div class="card-header">
+                        <span><i class="fas fa-paint-roller text-accent me-2"></i>2. Montaje del Museo</span>
+                        <span class="time-badge">5 min</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">Los estudiantes buscan espacios en paredes o mesas para colocar sus cartelones.</li>
+                            <li>Se organiza el espacio para permitir el flujo de personas, simulando una galería de arte.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card step-card">
+                    <div class="card-header">
+                        <span><i class="fas fa-walking text-accent me-2"></i>3. Recorrido y Exposición</span>
+                        <span class="time-badge">20 min</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2"><strong>La Galería (5m):</strong> Observación libre y ordenada de las obras.</li>
+                            <li class="mb-2"><strong>La Exposición (15m):</strong> Cada estudiante explica en 1 minuto el porqué de su palabra, su relación con la docencia y su representación visual.</li>
+                            <li class="text-muted small mt-2"><i class="fas fa-eye"></i> <em>La doctorante toma nota de las conexiones con la Educación Integral.</em></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 4 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card step-card">
+                    <div class="card-header">
+                        <span><i class="fas fa-comments text-accent me-2"></i>4. Coevaluación</span>
+                        <span class="time-badge">10 min</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">Se entregan post-its a los estudiantes.</li>
+                            <li class="mb-2">Deben visitar al menos 3 obras (no de amigos cercanos) y dejar una nota respondiendo: <em>"¿Qué me transmitió tu palabra y cómo la aplicarías en un aula?"</em></li>
+                            <li>Los post-its se pegan en los cartelones.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 5 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card step-card">
+                    <div class="card-header">
+                        <span><i class="fas fa-users text-accent me-2"></i>5. Plenaria y Reflexión</span>
+                        <span class="time-badge">10 min</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-2 fw-bold small">Preguntas generadoras:</p>
+                        <ul class="list-unstyled mb-0 small">
+                            <li class="mb-1"><i class="fas fa-angle-right me-1"></i> ¿Se repitieron palabras? ¿Por qué?</li>
+                            <li class="mb-1"><i class="fas fa-angle-right me-1"></i> ¿Cómo transformar una palabra en proyecto de aprendizaje?</li>
+                            <li><i class="fas fa-angle-right me-1"></i> ¿Cómo fomenta esto la inclusión y la identidad?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 6 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card step-card">
+                    <div class="card-header">
+                        <span><i class="fas fa-flag-checkered text-accent me-2"></i>6. Cierre y Evaluación</span>
+                        <span class="time-badge">5 min</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0 small">
+                            <li class="mb-1">Cierre reflexivo sobre la escucha y la palabra propia.</li>
+                            <li class="fw-bold mt-2">Criterios de Evaluación:</li>
+                            <li>1. Participación activa.</li>
+                            <li>2. Pertinencia de la palabra.</li>
+                            <li>3. Creatividad visual.</li>
+                            <li>4. Redacción del micro texto.</li>
+                            <li>5. Calidad en la retroalimentación.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Materiales y Nota -->
+        <div class="row mt-4 g-4">
+            <div class="col-md-5">
+                <div class="card h-100 border-0 shadow-sm bg-white">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-dark"><i class="fas fa-toolbox text-secondary me-2"></i>Materiales Necesarios</h5>
+                        <ul class="list-group list-group-flush mt-3">
+                            <li class="list-group-item bg-transparent"><i class="fas fa-check-circle text-success me-2"></i>Cartelones (tarea previa)</li>
+                            <li class="list-group-item bg-transparent"><i class="fas fa-check-circle text-success me-2"></i>Cinta adhesiva o plastilina</li>
+                            <li class="list-group-item bg-transparent"><i class="fas fa-check-circle text-success me-2"></i>Notas adhesivas (post-its) y bolígrafos</li>
+                            <li class="list-group-item bg-transparent"><i class="fas fa-check-circle text-success me-2"></i>Cronómetro (celular)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="note-box h-100 d-flex flex-column justify-content-center">
+                    <h5 class="fw-bold text-primary"><i class="fas fa-lightbulb me-2"></i>Nota Clave para la Doctorante</h5>
+                    <p class="mb-0 text-justify" style="text-align: justify;">
+                        Esta actividad permite <strong>observar el nivel de análisis crítico de los futuros docentes</strong>. Al ver cómo eligen y representan sus palabras, la facilitadora puede diagnosticar su conexión con la realidad social y educativa. El cierre debe hacer un "puente" explícito entre la actividad creativa y los conceptos teóricos de la Unidad III (Análisis Crítico del Discurso).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <!-- FLUJO DE LOS 6 PASOS -->
+        <section id="flujo-sesion">
+            <h3 class="text-center fw-bold mb-4 text-primary">Flujo de la Sesión (60 Minutos)</h3>
+            
+            <div class="flow-container">
+                <!-- Paso 1 -->
+                <div class="flow-step">
+                    <div class="flow-circle">1</div>
+                    <div class="flow-text">
+                        <div class="flow-title">Apertura</div>
+                        <span class="flow-time">10 min</span>
+                    </div>
+                </div>
+                
+                <!-- Paso 2 -->
+                <div class="flow-step">
+                    <div class="flow-circle">2</div>
+                    <div class="flow-text">
+                        <div class="flow-title">Montaje</div>
+                        <span class="flow-time">5 min</span>
+                    </div>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="flow-step">
+                    <div class="flow-circle">3</div>
+                    <div class="flow-text">
+                        <div class="flow-title">Recorrido</div>
+                        <span class="flow-time">20 min</span>
+                    </div>
+                </div>
+
+                <!-- Paso 4 -->
+                <div class="flow-step">
+                    <div class="flow-circle">4</div>
+                    <div class="flow-text">
+                        <div class="flow-title">Coevaluación</div>
+                        <span class="flow-time">10 min</span>
+                    </div>
+                </div>
+
+                <!-- Paso 5 -->
+                <div class="flow-step">
+                    <div class="flow-circle">5</div>
+                    <div class="flow-text">
+                        <div class="flow-title">Plenaria</div>
+                        <span class="flow-time">10 min</span>
+                    </div>
+                </div>
+
+                <!-- Paso 6 -->
+                <div class="flow-step">
+                    <div class="flow-circle">6</div>
+                    <div class="flow-text">
+                        <div class="flow-title">Cierre</div>
+                        <span class="flow-time">5 min</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        <div class="container">
+            <p class="mb-0 small">Plan de Sesión diseñado para la Unidad Curricular: Lenguaje y Comunicación - UNESR</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JS Personalizado (Animaciones al hacer scroll) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Animación simple de aparición para las tarjetas
+            const cards = document.querySelectorAll('.step-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 150); // Retardo escalonado
+            });
+        });
+    </script>
+</body>
+</html>
